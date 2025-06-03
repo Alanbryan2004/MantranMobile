@@ -91,7 +91,6 @@
       padding: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       cursor: pointer;
-      text-decoration: none;
     }
     .card h2 {
       margin: 0 0 10px;
@@ -100,13 +99,6 @@
     .card p {
       margin: 5px 0;
       font-size: 14px;
-    }
-    .dados-linha {
-      display: flex;
-      justify-content: space-between;
-    }
-    .dados-linha span {
-      font-weight: bold;
     }
   </style>
 </head>
@@ -129,15 +121,16 @@
         <h1>Detalhe da Entrega</h1>
       </div>
       <div class="content">
-        <a href="baixar_notas.html" class="card">
+        <div class="card" onclick="location.href='baixar_notas.html'">
           <h2>ACME LTDA</h2>
-          <div class="dados-linha">
-            <p><span>Nº Docto:</span> 123456</p>
-            <p><span>Tipo Docto:</span> CTe</p>
-          </div>
-          <p><span>Endereço:</span> Rua das Flores, 123 - Centro</p>
-          <p><span>Cidade/UF:</span> São Paulo/SP</p>
-        </a>
+          <p>CNPJ: 12.345.678/0001-90</p>
+          <p>Nome Fantasia: ACME Comercial</p>
+          <p>Endereço: Rua das Flores, 123</p>
+          <p>Bairro: Centro</p>
+          <p>Cidade: São Paulo/SP</p>
+          <p>Telefone: (11) 99999-9999</p>
+          <p>Contato: João da Silva</p>
+        </div>
       </div>
     </div>
   </div>
