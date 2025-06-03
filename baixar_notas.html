@@ -3,89 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baixar Notas</title>
+  <title>Nota Fiscal</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    html, body {
+    body, html {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #8B0000, #000000);
-      color: #ffffff;
+      color: #fff;
+      height: 100%;
     }
     .container {
       display: flex;
-      height: 100%;
-      width: 100%;
-      flex-direction: row;
+      height: 100vh;
     }
     .sidebar {
       width: 250px;
-      background-color: #1a1a1a;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      z-index: 30;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+      background: #1a1a1a;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.5);
     }
-    .sidebar.active { transform: translateX(0); }
     .sidebar-header {
-      background: linear-gradient(to right, #8B0000, #000000);
-      color: white;
       padding: 20px;
+      background: linear-gradient(to right, #8B0000, #000000);
       text-align: center;
     }
-    .sidebar-header img { width: 60px; margin-bottom: 10px; }
+    .sidebar-header img {
+      width: 60px;
+      margin-bottom: 10px;
+    }
     .menu-item {
-      margin: 20px;
+      padding: 15px 20px;
       display: flex;
       align-items: center;
       cursor: pointer;
-      color: #ffffff;
-      font-weight: 500;
+      color: white;
+      transition: background 0.3s;
     }
-    .menu-item i { margin-right: 10px; }
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .menu-item i {
+      margin-right: 10px;
+    }
     .main {
       flex: 1;
-      margin-left: 0;
-      transition: margin-left 0.3s ease;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .topbar {
       background: linear-gradient(to right, #8B0000, #000000);
       color: white;
       display: flex;
       align-items: center;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 20;
       height: 60px;
-    }
-    .topbar button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      margin-left: 10px;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     .topbar h1 {
       font-size: 20px;
-      margin-left: 15px;
     }
     .content {
-      margin-top: 60px;
       padding: 20px;
+      overflow-y: auto;
     }
     .card {
-      background-color: #ffffff;
+      background: #fff;
       color: #000;
       border-radius: 10px;
       padding: 20px;
@@ -93,94 +80,76 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     .card h2 {
-      margin: 0 0 10px;
       color: #8B0000;
+      margin-bottom: 15px;
     }
-    .card label, select {
+    .info {
+      margin-bottom: 10px;
+    }
+    .info strong {
+      color: #8B0000;
       display: block;
-      margin: 10px 0;
-      color: #000;
     }
-    select {
-      padding: 8px;
-      border-radius: 5px;
-      width: 100%;
-    }
-    .buttons {
+    .button-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 20px;
       margin-top: 20px;
     }
-    .buttons button {
-      flex: 1;
-      min-width: 120px;
-      padding: 12px;
-      background-color: #8B0000;
-      color: #fff;
+    .btn {
+      background: #8B0000;
+      color: white;
+      padding: 10px 20px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #a30000;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <img src="logo.png" alt="Logo Mantran" />
-        <h2>Motorista</h2>
-        <p>ID123</p>
-      </div>
-      <div class="menu-item"><i class="material-icons">description</i>Manifesto</div>
-      <div class="menu-item"><i class="material-icons">timer</i>Jornada</div>
-      <div class="menu-item"><i class="material-icons">map</i>Viagens</div>
-      <a href="login.html" class="menu-item"><i class="material-icons">exit_to_app</i>Sair</a>
+
+<div class="container">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="logo.png" alt="Logo Mantran">
+      <h2>Motorista</h2>
+      <p>ID123</p>
     </div>
-    <div class="main">
-      <div class="topbar">
-        <button id="menuButton"><i class="material-icons">menu</i></button>
-        <h1>Entrega - Notas Fiscais</h1>
-      </div>
-      <div class="content">
-        <div class="card">
-          <h2>Notas Fiscais</h2>
-          <label><input type="checkbox"> NF 123456</label>
-          <label><input type="checkbox"> NF 654321</label>
-          <label><input type="checkbox"> NF 789012</label>
+    <div class="menu-item"><i class="material-icons">description</i>Manifesto</div>
+    <div class="menu-item"><i class="material-icons">timer</i>Jornada</div>
+    <div class="menu-item"><i class="material-icons">map</i>Viagens</div>
+    <div class="menu-item"><i class="material-icons">exit_to_app</i>Sair</div>
+  </div>
 
-          <label for="ocorrencia">Ocorrência:</label>
-          <select id="ocorrencia">
-            <option>Entrega Realizada com Sucesso</option>
-            <option>Produto Danificado</option>
-            <option>Cliente não aceitou</option>
-            <option>Endereço Inexistente</option>
-          </select>
+  <div class="main">
+    <div class="topbar">
+      <h1>Nota Fiscal</h1>
+    </div>
 
-          <div class="buttons">
-            <button>Baixar Notas</button>
-            <button onclick="alert('Abrir câmera')">Adicionar Foto</button>
-            <button>Chegada no Cliente</button>
-          </div>
+    <div class="content">
+      <div class="card">
+        <h2>Filial: 003 | Manifesto: 043952</h2>
+        <div class="info">
+          <strong>N.F.:</strong> 00056090 | Série: 1
+        </div>
+        <div class="info">
+          <strong>Ocorrência:</strong> 001 - ENTREGA REALIZADA NORMAL...
+        </div>
+        <div class="button-group">
+          <button class="btn"><i class="material-icons">cloud_download</i>Baixar Notas</button>
+          <button class="btn"><i class="material-icons">photo_camera</i>Adicionar Foto</button>
+          <button class="btn"><i class="material-icons">flag</i>Chegada Cliente</button>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const menuButton = document.getElementById('menuButton');
+</div>
 
-    menuButton.addEventListener('click', function (e) {
-      e.stopPropagation();
-      sidebar.classList.toggle('active');
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!sidebar.contains(event.target) && event.target !== menuButton) {
-        sidebar.classList.remove('active');
-      }
-    });
-  </script>
 </body>
 </html>
