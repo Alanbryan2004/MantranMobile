@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endereços de Entrega</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: #ffffff;
+    }
+
+    .topbar {
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar h1 {
+      font-size: 20px;
+      margin: 0 0 0 10px;
+    }
+
+    .content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #8B0000;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <i class="material-icons">arrow_back</i>
+    <h1>Endereços de Entrega</h1>
+  </div>
+  <div class="content">
+    <div class="card">
+      <h3>ACME LTDA</h3>
+      <p>CNPJ: 12.345.678/0001-90</p>
+      <p>Nome Fantasia: ACME Comercial</p>
+      <p>Rua das Flores, 123 - Centro - São Paulo/SP</p>
+    </div>
+
+    <div class="card">
+      <h3>Distribuidora XPTO</h3>
+      <p>CPF: 123.456.789-00</p>
+      <p>Nome Fantasia: XPTO Delivery</p>
+      <p>Av. Paulista, 456 - Bela Vista - São Paulo/SP</p>
+    </div>
+
+    <div class="card">
+      <h3>Supermercado ABC</h3>
+      <p>CNPJ: 98.765.432/0001-11</p>
+      <p>Nome Fantasia: ABC Super</p>
+      <p>Rua Verde, 789 - Jardim - Campinas/SP</p>
+    </div>
+  </div>
+</body>
+</html>
