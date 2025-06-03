@@ -123,6 +123,7 @@
       display: flex;
       gap: 20px;
       margin: 20px;
+      align-items: center;
     }
     .btn {
       background: #8B0000;
@@ -142,6 +143,11 @@
     }
     .btn:hover:enabled {
       background: #a30000;
+    }
+    #chegadaInfo, #fotoInfo {
+      margin-left: 10px;
+      font-size: 14px;
+      color: #fff;
     }
   </style>
 </head>
@@ -187,24 +193,26 @@
 
       <div class="card">
         <h2>Ocorrência</h2>
-        <div class="info">
-          <input type="radio" name="ocorrencia" value="sucesso"> Entrega Realizada com Sucesso
-        </div>
-        <div class="info">
-          <input type="radio" name="ocorrencia" value="avaria"> Produto com Avaria
-        </div>
-        <div class="info">
-          <input type="radio" name="ocorrencia" value="inexistente"> Endereço Inexistente
-        </div>
-        <div class="info">
-          <input type="radio" name="ocorrencia" value="devolucao"> Devolução da Mercadoria
-        </div>
+        <select id="ocorrenciaSelect" style="width: 100%; padding: 10px; border-radius: 5px;">
+          <option value="">Selecione uma ocorrência</option>
+          <option value="sucesso">Entrega Realizada com Sucesso</option>
+          <option value="avaria">Produto com Avaria</option>
+          <option value="inexistente">Endereço Inexistente</option>
+          <option value="devolucao">Devolução da Mercadoria</option>
+        </select>
       </div>
 
       <div class="button-group">
         <button class="btn" id="chegadaBtn"><i class="material-icons">flag</i>Chegada Cliente</button>
+        <span id="chegadaInfo"></span>
+
         <button class="btn" id="baixarBtn" disabled><i class="material-icons">cloud_download</i>Baixar Notas</button>
-        <button class="btn"><i class="material-icons">photo_camera</i>Adicionar Foto</button>
+
+        <label class="btn">
+          <i class="material-icons">photo_camera</i>Adicionar Foto
+          <input type="file" id="fotoInput" style="display: none;">
+        </label>
+        <span id="fotoInfo"></span>
       </div>
 
     </div>
@@ -217,6 +225,9 @@
   const checkboxes = document.querySelectorAll('.nota-checkbox');
   const baixarBtn = document.getElementById('baixarBtn');
   const chegadaBtn = document.getElementById('chegadaBtn');
+  const chegadaInfo = document.getElementById('chegadaInfo');
+  const fotoInput = document.getElementById('fotoInput');
+  const fotoInfo = document.getElementById('fotoInfo');
 
   menuButton.addEventListener('click', function(e) {
     e.stopPropagation();
@@ -242,7 +253,15 @@
 
   chegadaBtn.addEventListener('click', () => {
     const now = new Date();
-    alert('Chegada ao Cliente registrada: ' + now.toLocaleString());
+    chegadaInfo.textContent = `Chegada registrada: ${now.toLocaleString()}`;
+  });
+
+  fotoInput.addEventListener('change', () => {
+    if (fotoInput.files.length > 0) {
+      fotoInfo.textContent = `Foto selecionada: ${fotoInput.files[0].name}`;
+    } else {
+      fotoInfo.textContent = '';
+    }
   });
 </script>
 
