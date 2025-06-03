@@ -93,12 +93,22 @@
       cursor: pointer;
     }
     .card h2 {
-      margin: 0 0 10px;
+      margin: 0 0 20px;
       color: #8B0000;
     }
-    .card p {
-      margin: 5px 0;
-      font-size: 14px;
+    .info-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    .info {
+      flex: 1;
+      min-width: 150px;
+    }
+    .info strong {
+      display: block;
+      color: #8B0000;
     }
   </style>
 </head>
@@ -123,8 +133,32 @@
       <div class="content">
         <div class="card" onclick="location.href='baixar_notas.html'">
           <h2>ACME LTDA</h2>
-          <p>Nº Docto: 492274     Tipo Docto: Conhecimento</p>
-          <p>Endereço: Rua das Flores, 123 - Centro - São Paulo/SP</p>
+
+          <div class="info-group">
+            <div class="info">
+              <strong>Nº Docto:</strong>
+              <div>492274</div>
+            </div>
+            <div class="info">
+              <strong>Tipo Docto:</strong>
+              <div>Conhecimento</div>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <div class="info">
+              <strong>Endereço:</strong>
+              <div>Rua das Flores, 123</div>
+            </div>
+            <div class="info">
+              <strong>Bairro:</strong>
+              <div>Centro</div>
+            </div>
+            <div class="info">
+              <strong>Cidade/UF:</strong>
+              <div>São Paulo/SP</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
