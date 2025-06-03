@@ -7,20 +7,28 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #8B0000, #000000);
       color: #ffffff;
-      height: 100vh;
     }
-    .container { display: flex; height: 100%; width: 100%; flex-direction: row; }
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      flex-direction: row;
+    }
     .sidebar {
       width: 250px;
       background-color: #1a1a1a;
       box-shadow: 2px 0 5px rgba(0,0,0,0.3);
       position: fixed;
-      height: 100%;
+      top: 0;
+      left: 0;
+      height: 100vh;
       z-index: 10;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
