@@ -28,8 +28,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
-      z-index: 10;
+      height: 100vh;
+      z-index: 30; /* elevado acima da topbar */
       transform: translateX(-100%);
       transition: transform 0.3s ease;
     }
@@ -65,7 +65,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 20;
+      z-index: 20; /* abaixo da sidebar */
       height: 60px;
     }
     .topbar button {
