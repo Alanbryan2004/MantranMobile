@@ -84,43 +84,45 @@
     }
     .content {
       margin-top: 70px;
-      padding: 20px;
+      padding: 0;
     }
     .info-topo {
       background: #fff;
       color: #000;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
+      width: 100%;
+      margin: 0;
+      padding: 15px 0;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       font-weight: bold;
       font-size: 16px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .card {
       background: #fff;
       color: #000;
       border-radius: 10px;
       padding: 20px;
-      margin-bottom: 20px;
+      margin: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     .card h2 {
       color: #8B0000;
       margin-bottom: 15px;
     }
-    .nota-item {
-      display: flex;
-      align-items: center;
+    .info {
       margin-bottom: 10px;
     }
-    .nota-item label {
-      margin-left: 10px;
+    .info strong {
+      color: #8B0000;
+      display: block;
     }
     .button-group {
       display: flex;
       gap: 20px;
-      margin-top: 20px;
-      flex-wrap: wrap;
+      margin: 20px;
     }
     .btn {
       background: #8B0000;
@@ -134,12 +136,12 @@
       gap: 5px;
       transition: background 0.3s;
     }
-    .btn:hover {
-      background: #a30000;
+    .btn:disabled {
+      background: #888;
+      cursor: not-allowed;
     }
-    .hidden {
-      display: none;
-      margin-top: 10px;
+    .btn:hover:enabled {
+      background: #a30000;
     }
   </style>
 </head>
@@ -165,58 +167,45 @@
     </div>
 
     <div class="content">
-
-      <!-- Informação topo -->
+      
       <div class="info-topo">
         Filial: <span>003</span> | Manifesto: <span>231245</span>
       </div>
 
-      <!-- Card Notas Fiscais -->
       <div class="card">
         <h2>Notas Fiscais</h2>
-        <div class="nota-item">
-          <input type="checkbox" id="nf1">
-          <label for="nf1">N.F.: 00056090 | Série: 1</label>
+        <div class="info">
+          <input type="checkbox" class="nota-checkbox" value="00056090"> N.F.: 00056090 | Série: 1
         </div>
-        <div class="nota-item">
-          <input type="checkbox" id="nf2">
-          <label for="nf2">N.F.: 00056091 | Série: 1</label>
+        <div class="info">
+          <input type="checkbox" class="nota-checkbox" value="00056091"> N.F.: 00056091 | Série: 1
         </div>
-        <div class="nota-item">
-          <input type="checkbox" id="nf3">
-          <label for="nf3">N.F.: 00056092 | Série: 1</label>
+        <div class="info">
+          <input type="checkbox" class="nota-checkbox" value="00056092"> N.F.: 00056092 | Série: 1
         </div>
       </div>
 
-      <!-- Card Ocorrência -->
       <div class="card">
         <h2>Ocorrência</h2>
-        <select id="ocorrencia" style="width:100%; padding:10px; border-radius:5px;">
-          <option>Entrega Realizada com Sucesso</option>
-          <option>Produto com Avaria</option>
-          <option>Endereço Inexistente</option>
-          <option>Devolução da Mercadoria</option>
-        </select>
+        <div class="info">
+          <input type="radio" name="ocorrencia" value="sucesso"> Entrega Realizada com Sucesso
+        </div>
+        <div class="info">
+          <input type="radio" name="ocorrencia" value="avaria"> Produto com Avaria
+        </div>
+        <div class="info">
+          <input type="radio" name="ocorrencia" value="inexistente"> Endereço Inexistente
+        </div>
+        <div class="info">
+          <input type="radio" name="ocorrencia" value="devolucao"> Devolução da Mercadoria
+        </div>
       </div>
 
-      <!-- Botões -->
       <div class="button-group">
-        <button class="btn" onclick="chegadaCliente()">
-          <i class="material-icons">flag</i>Chegada Cliente
-        </button>
-        <button class="btn" onclick="baixarNotas()">
-          <i class="material-icons">cloud_download</i>Baixar Notas
-        </button>
-        <button class="btn" onclick="liberarFoto()">
-          <i class="material-icons">photo_camera</i>Adicionar Foto
-        </button>
+        <button class="btn" id="chegadaBtn"><i class="material-icons">flag</i>Chegada Cliente</button>
+        <button class="btn" id="baixarBtn" disabled><i class="material-icons">cloud_download</i>Baixar Notas</button>
+        <button class="btn"><i class="material-icons">photo_camera</i>Adicionar Foto</button>
       </div>
-
-      <!-- Input para Upload -->
-      <input type="file" id="uploadFoto" class="hidden">
-
-      <!-- Exibir Data/Hora Chegada -->
-      <div id="chegadaInfo" class="hidden"></div>
 
     </div>
   </div>
@@ -225,6 +214,9 @@
 <script>
   const sidebar = document.getElementById('sidebar');
   const menuButton = document.getElementById('menuButton');
+  const checkboxes = document.querySelectorAll('.nota-checkbox');
+  const baixarBtn = document.getElementById('baixarBtn');
+  const chegadaBtn = document.getElementById('chegadaBtn');
 
   menuButton.addEventListener('click', function(e) {
     e.stopPropagation();
@@ -237,20 +229,21 @@
     }
   });
 
-  function baixarNotas() {
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const anyChecked = Array.from(checkboxes).some(c => c.checked);
+      baixarBtn.disabled = !anyChecked;
+    });
+  });
+
+  baixarBtn.addEventListener('click', () => {
     alert('Baixa Realizada com Sucesso');
-  }
+  });
 
-  function liberarFoto() {
-    document.getElementById('uploadFoto').classList.toggle('hidden');
-  }
-
-  function chegadaCliente() {
+  chegadaBtn.addEventListener('click', () => {
     const now = new Date();
-    const chegadaInfo = document.getElementById('chegadaInfo');
-    chegadaInfo.textContent = 'Chegada registrada em: ' + now.toLocaleString();
-    chegadaInfo.classList.remove('hidden');
-  }
+    alert('Chegada ao Cliente registrada: ' + now.toLocaleString());
+  });
 </script>
 
 </body>
