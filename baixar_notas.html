@@ -17,22 +17,15 @@
     }
     .container {
       display: flex;
-      height: 100%;
+      height: 100vh;
     }
     .sidebar {
       width: 250px;
       background: #1a1a1a;
-      position: fixed;
-      left: 0;
-      top: 0;
       height: 100%;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 10;
+      display: flex;
+      flex-direction: column;
       box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-    }
-    .sidebar.active {
-      transform: translateX(0);
     }
     .sidebar-header {
       padding: 20px;
@@ -49,42 +42,34 @@
       align-items: center;
       cursor: pointer;
       color: white;
+      transition: background 0.3s;
+    }
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
     .menu-item i {
       margin-right: 10px;
     }
     .main {
       flex: 1;
-      margin-left: 0;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
     }
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
       background: linear-gradient(to right, #8B0000, #000000);
       color: white;
       display: flex;
       align-items: center;
       height: 60px;
-      z-index: 5;
-      padding: 0 10px;
-    }
-    .topbar button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     .topbar h1 {
-      margin-left: 15px;
       font-size: 20px;
     }
     .content {
-      margin-top: 70px;
       padding: 20px;
+      overflow-y: auto;
     }
     .card {
       background: #fff;
@@ -98,12 +83,13 @@
       color: #8B0000;
       margin-bottom: 15px;
     }
-    .info {
+    .nota-item {
+      display: flex;
+      align-items: center;
       margin-bottom: 10px;
     }
-    .info strong {
-      color: #8B0000;
-      display: block;
+    .nota-item label {
+      margin-left: 10px;
     }
     .button-group {
       display: flex;
@@ -125,12 +111,16 @@
     .btn:hover {
       background: #a30000;
     }
+    .hidden {
+      display: none;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="sidebar" id="sidebar">
+  <div class="sidebar">
     <div class="sidebar-header">
       <img src="logo.png" alt="Logo Mantran">
       <h2>Motorista</h2>
@@ -144,43 +134,77 @@
 
   <div class="main">
     <div class="topbar">
-      <button id="menuButton"><i class="material-icons">menu</i></button>
       <h1>Nota Fiscal</h1>
     </div>
 
     <div class="content">
+      
+      <!-- Card de Notas Fiscais -->
       <div class="card">
-        <h2>Filial: 003 | Manifesto: 043952</h2>
-        <div class="info">
-          <strong>N.F.:</strong> 00056090 | Série: 1
+        <h2>Notas Fiscais</h2>
+        <div class="nota-item">
+          <input type="checkbox" id="nf1">
+          <label for="nf1">N.F.: 00056090 | Série: 1</label>
         </div>
-        <div class="info">
-          <strong>Ocorrência:</strong> 001 - ENTREGA REALIZADA NORMAL...
+        <div class="nota-item">
+          <input type="checkbox" id="nf2">
+          <label for="nf2">N.F.: 00056091 | Série: 1</label>
         </div>
-        <div class="button-group">
-          <button class="btn"><i class="material-icons">cloud_download</i>Baixar Notas</button>
-          <button class="btn"><i class="material-icons">photo_camera</i>Adicionar Foto</button>
-          <button class="btn"><i class="material-icons">flag</i>Chegada Cliente</button>
+        <div class="nota-item">
+          <input type="checkbox" id="nf3">
+          <label for="nf3">N.F.: 00056092 | Série: 1</label>
         </div>
       </div>
+
+      <!-- Card de Ocorrências -->
+      <div class="card">
+        <h2>Ocorrência</h2>
+        <select id="ocorrencia" style="width:100%; padding:10px; border-radius:5px;">
+          <option>Entrega Realizada com Sucesso</option>
+          <option>Produto com Avaria</option>
+          <option>Endereço Inexistente</option>
+          <option>Devolução da Mercadoria</option>
+        </select>
+      </div>
+
+      <!-- Botões -->
+      <div class="button-group">
+        <button class="btn" onclick="baixarNotas()">
+          <i class="material-icons">cloud_download</i>Baixar Notas
+        </button>
+        <button class="btn" onclick="liberarFoto()">
+          <i class="material-icons">photo_camera</i>Adicionar Foto
+        </button>
+        <button class="btn" onclick="chegadaCliente()">
+          <i class="material-icons">flag</i>Chegada Cliente
+        </button>
+      </div>
+
+      <!-- Input para Upload de Foto -->
+      <input type="file" id="uploadFoto" class="hidden">
+
+      <!-- Data/hora da Chegada -->
+      <div id="chegadaInfo" class="hidden"></div>
+
     </div>
   </div>
 </div>
 
 <script>
-  const sidebar = document.getElementById('sidebar');
-  const menuButton = document.getElementById('menuButton');
+  function baixarNotas() {
+    alert('Baixa Realizada com Sucesso');
+  }
 
-  menuButton.addEventListener('click', function(e) {
-    e.stopPropagation();
-    sidebar.classList.toggle('active');
-  });
+  function liberarFoto() {
+    document.getElementById('uploadFoto').classList.toggle('hidden');
+  }
 
-  document.addEventListener('click', function(event) {
-    if (!sidebar.contains(event.target) && event.target !== menuButton) {
-      sidebar.classList.remove('active');
-    }
-  });
+  function chegadaCliente() {
+    const now = new Date();
+    const chegadaInfo = document.getElementById('chegadaInfo');
+    chegadaInfo.textContent = 'Chegada registrada em: ' + now.toLocaleString();
+    chegadaInfo.classList.remove('hidden');
+  }
 </script>
 
 </body>
