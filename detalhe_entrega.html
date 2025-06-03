@@ -91,6 +91,10 @@
       padding: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
     }
     .card h2 {
       margin: 0 0 20px;
@@ -98,12 +102,10 @@
     }
     .info-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+      gap: 30px;
       margin-bottom: 10px;
     }
     .info {
-      flex: 1;
       min-width: 150px;
     }
     .info strong {
@@ -145,19 +147,9 @@
             </div>
           </div>
 
-          <div class="info-group">
-            <div class="info">
-              <strong>Endereço:</strong>
-              <div>Rua das Flores, 123</div>
-            </div>
-            <div class="info">
-              <strong>Bairro:</strong>
-              <div>Centro</div>
-            </div>
-            <div class="info">
-              <strong>Cidade/UF:</strong>
-              <div>São Paulo/SP</div>
-            </div>
+          <div class="info">
+            <strong>Endereço:</strong>
+            <div>Rua das Flores, 123 - Centro - São Paulo/SP</div>
           </div>
         </div>
       </div>
