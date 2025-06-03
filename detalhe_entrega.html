@@ -91,14 +91,31 @@
       padding: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
     }
     .card h2 {
-      margin: 0 0 10px;
+      margin: 0 0 15px;
       color: #8B0000;
     }
-    .card p {
-      margin: 5px 0;
-      font-size: 14px;
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .info-row span {
+      font-weight: bold;
+      color: #8B0000;
+    }
+    .info-block {
+      margin-bottom: 8px;
+    }
+    .info-block span {
+      font-weight: bold;
+      color: #8B0000;
     }
   </style>
 </head>
@@ -121,16 +138,16 @@
         <h1>Detalhe da Entrega</h1>
       </div>
       <div class="content">
-        <div class="card" onclick="location.href='baixar_notas.html'">
+        <a href="baixar_notas.html" class="card">
           <h2>ACME LTDA</h2>
-          <p>CNPJ: 12.345.678/0001-90</p>
-          <p>Nome Fantasia: ACME Comercial</p>
-          <p>Endereço: Rua das Flores, 123</p>
-          <p>Bairro: Centro</p>
-          <p>Cidade: São Paulo/SP</p>
-          <p>Telefone: (11) 99999-9999</p>
-          <p>Contato: João da Silva</p>
-        </div>
+          <div class="info-row">
+            <div><span>Nº Docto:</span> 123456</div>
+            <div><span>Tipo Docto:</span> CTe</div>
+          </div>
+          <div class="info-block"><span>Endereço:</span> Rua das Flores, 123</div>
+          <div class="info-block"><span>Bairro:</span> Centro</div>
+          <div class="info-block"><span>Cidade/UF:</span> São Paulo/SP</div>
+        </a>
       </div>
     </div>
   </div>
