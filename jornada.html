@@ -2,13 +2,15 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jornada - Mantran Mobile</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     html, body {
-      margin: 0; padding: 0; height: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #8B0000, #000000);
       color: #fff;
@@ -16,13 +18,13 @@
     .container {
       display: flex;
       height: 100vh;
-      flex-direction: row;
     }
     .sidebar {
       width: 250px;
       background-color: #1a1a1a;
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       height: 100vh;
       z-index: 30;
       transform: translateX(-100%);
@@ -53,8 +55,6 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      padding-top: 110px; /* espaço para topbar + card motorista */
-      padding-bottom: 100px; /* espaço para rodapé botão */
     }
     .topbar {
       background: linear-gradient(to right, #8B0000, #000000);
@@ -63,10 +63,11 @@
       align-items: center;
       width: 100%;
       position: fixed;
-      top: 0; left: 0;
-      z-index: 40;
+      top: 0;
+      left: 0;
+      z-index: 20;
       height: 60px;
-      padding-left: 10px;
+      padding: 0 15px;
     }
     .topbar button {
       background: none;
@@ -74,38 +75,38 @@
       color: white;
       font-size: 24px;
       cursor: pointer;
-      margin-left: 10px;
+      margin-right: 15px;
     }
-    /* Card fino do motorista abaixo da topbar */
-    .driver-info {
-      position: fixed;
-      top: 60px;
-      left: 0;
-      right: 0;
-      background: #330000cc;
-      color: #fff;
-      font-weight: 600;
+
+    /* Novo card motorista topo */
+    .motorista-info {
+      margin-top: 60px; /* abaixo da topbar fixa */
+      background-color: rgba(255, 255, 255, 0.15);
       padding: 8px 20px;
-      font-size: 16px;
+      font-weight: 600;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 35;
-      border-bottom: 1px solid #550000aa;
+      color: #fff;
       user-select: none;
     }
+
     .content {
+      padding: 20px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 10px;
       flex: 1;
       overflow-y: auto;
+      /* Calculando altura para não cobrir o footer e topo */
+      max-height: calc(100vh - 60px - 35px - 48px - 100px);
     }
+
     .card {
       background-color: #f1f1f1;
       color: #000;
       border-radius: 10px;
-      padding: 10px;
+      padding: 10px 5px;
       text-align: center;
       cursor: pointer;
       display: flex;
@@ -113,20 +114,47 @@
       align-items: center;
       justify-content: center;
       user-select: none;
+      min-height: 110px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .card:hover {
+      background-color: #ddd;
     }
     .card.active {
       background-color: #ffd700;
     }
+    .card i.material-icons {
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: #8B0000;
+      user-select: none;
+    }
     #descansoCard {
       grid-column: span 2;
+      min-height: 110px;
     }
+
+    /* Horas trabalhando e totais, também ocupam linha inteira */
+    .total {
+      grid-column: span 2;
+      background-color: #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 8px;
+    }
+
+    /* Rodapé fixo para botão Encerrar e horas */
     .footer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: #8B0000;
-      padding: 15px 20px;
+      padding: 12px 20px;
       box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
       display: flex;
       flex-direction: column;
@@ -136,42 +164,24 @@
     .btn-finalizar {
       width: 100%;
       padding: 15px;
-      font-size: 18px;
-      background-color: #cc0000;
+      font-size: 16px;
+      background-color: #8B0000;
       color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
       user-select: none;
+      transition: background-color 0.3s;
     }
     .btn-finalizar:hover {
-      background-color: #aa0000;
+      background-color: #a10000;
     }
-    .total {
-      width: 100%;
-      background: transparent;
-      color: #fff;
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 8px;
-      text-align: center;
-      user-select: none;
-    }
+
     @media (min-width: 768px) {
       .main { margin-left: 250px; }
       .topbar { left: 250px; }
       .sidebar { transform: translateX(0); }
-      .driver-info { left: 250px; }
-    }
-    /* Ícones nos cards */
-    .card i.material-icons {
-      font-size: 40px;
-      margin-bottom: 8px;
-      color: #8B0000;
-      user-select: none;
     }
   </style>
 </head>
@@ -191,12 +201,14 @@
     <div class="main">
       <div class="topbar">
         <button id="menuButton"><i class="material-icons">menu</i></button>
-        <h1 style="margin-left: 15px; font-size: 20px;">Jornada</h1>
+        <h1 style="margin-left: 0; font-size: 20px;">Jornada</h1>
       </div>
-      <div class="driver-info">
+
+      <div class="motorista-info">
         <div>Motorista: <strong>Nome do Motorista</strong></div>
-        <div>CNH: <strong>1234567890</strong></div>
+        <div>CNH: <strong>123456789</strong></div>
       </div>
+
       <div class="content" id="content">
         <div class="card" onclick="startTimer('refeicao')">
           <i class="material-icons">restaurant</i>
@@ -209,7 +221,7 @@
           <p>Espera</p>
         </div>
         <div class="card" onclick="startTimer('disponivel')">
-          <i class="material-icons">event_available</i>
+          <i class="material-icons">check_circle</i>
           <div id="disponivel">00:00:00</div>
           <p>Disponível</p>
         </div>
@@ -218,21 +230,24 @@
           <div id="direcao">00:00:00</div>
           <p>Direção</p>
         </div>
-        <div class="card" id="descansoCard" onclick="startTimer('descanso')" style="cursor:pointer; grid-column: span 2;">
+        <div class="card" id="descansoCard" onclick="startTimer('descanso')">
           <i class="material-icons">hotel</i>
           <div id="descanso">00:00:00</div>
           <p>Descanso</p>
         </div>
+
+        <div class="total">
+          Horas Trabalhando<br><span id="horasTrabalhando">00:00:00</span>
+        </div>
+        <div class="total">
+          Horas Totais<br><span id="horasTotais">00:00:00</span>
+        </div>
       </div>
+
       <div class="footer">
-        <div class="total">
-          Horas Trabalhando<br /><span id="horasTrabalhando">00:00:00</span>
-        </div>
-        <div class="total">
-          Horas Totais<br /><span id="horasTotais">00:00:00</span>
-        </div>
         <button class="btn-finalizar" onclick="encerrarJornada()">Encerrar Jornada</button>
       </div>
+
     </div>
   </div>
 
