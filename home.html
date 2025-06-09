@@ -75,14 +75,15 @@
       cursor: pointer;
       margin-left: 10px;
     }
-    .content {
-      margin-top: 60px;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      justify-items: center;
-    }
+.content {
+  margin-top: 60px;
+  padding: 60px 20px 40px 20px; /* top, right, bottom, left */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  justify-items: center;
+  min-height: calc(100vh - 60px); /* altura mínima considerando a topbar */
+}
     .card {
       background-color: #ffffff;
       color: #000;
