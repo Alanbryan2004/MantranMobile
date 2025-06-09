@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Início - Mantran Mobile</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: #ffffff;
+    }
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      flex-direction: row;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #1a1a1a;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 30;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar.active { transform: translateX(0); }
+    .sidebar-header {
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .sidebar-header img { width: 60px; margin-bottom: 10px; }
+    .menu-item {
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #ffffff;
+      font-weight: 500;
+    }
+    .menu-item i { margin-right: 10px; }
+    .main {
+      flex: 1;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      width: 100%;
+    }
+    .topbar {
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: white;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      height: 60px;
+    }
+    .topbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .content {
+      margin-top: 60px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background-color: #ffffff;
+      color: #000;
+      border-radius: 10px;
+      padding: 20px;
+      width: 180px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .card:hover { transform: scale(1.05); }
+    .card i {
+      font-size: 48px;
+      color: #8B0000;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #8B0000;
+    }
+    @media (min-width: 768px) {
+      .main { margin-left: 250px; }
+      .topbar { left: 250px; }
+      .sidebar { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="logo.png" alt="Logo Mantran" />
+        <h2>Motorista</h2>
+        <p>ID123</p>
+      </div>
+      <div class="menu-item"><i class="material-icons">description</i>Manifesto</div>
+      <div class="menu-item"><i class="material-icons">timer</i>Jornada</div>
+      <div class="menu-item"><i class="material-icons">map</i>Viagens</div>
+      <a href="index.html" class="menu-item"><i class="material-icons">exit_to_app</i>Sair</a>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <button id="menuButton"><i class="material-icons">menu</i></button>
+        <h1 style="margin-left: 15px; font-size: 20px;">Início</h1>
+      </div>
+      <div class="content">
+        <div class="card" onclick="location.href='dashboard.html'">
+          <i class="material-icons">description</i>
+          <h3>Manifesto</h3>
+        </div>
+        <div class="card" onclick="location.href='jornada.html'">
+          <i class="material-icons">timer</i>
+          <h3>Jornada</h3>
+        </div>
+        <div class="card" onclick="location.href='viagens.html'">
+          <i class="material-icons">map</i>
+          <h3>Viagens</h3>
+        </div>
+        <div class="card" onclick="location.href='index.html'">
+          <i class="material-icons">exit_to_app</i>
+          <h3>Sair</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuButton = document.getElementById('menuButton');
+
+    menuButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!sidebar.contains(event.target) && event.target !== menuButton) {
+        sidebar.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
