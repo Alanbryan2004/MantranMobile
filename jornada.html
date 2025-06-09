@@ -18,6 +18,7 @@
     .container {
       display: flex;
       height: 100vh;
+      flex-direction: column;
     }
     .sidebar {
       width: 250px;
@@ -52,6 +53,9 @@
       margin-left: 0;
       transition: margin-left 0.3s ease;
       width: 100%;
+      padding-top: 60px; /* espaço para topbar */
+      padding-bottom: 110px; /* espaço para rodapé */
+      overflow-y: auto;
     }
     .topbar {
       background: linear-gradient(to right, #8B0000, #000000);
@@ -74,11 +78,10 @@
       margin-left: 10px;
     }
     .content {
-      margin-top: 60px;
-      padding: 20px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
+      padding: 20px;
     }
     .card {
       background-color: #f1f1f1;
@@ -87,32 +90,62 @@
       padding: 10px;
       text-align: center;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-weight: bold;
+      font-size: 16px;
     }
     .card.active {
       background-color: #ffd700;
     }
-    .total {
+    .card i.material-icons {
+      font-size: 36px;
+      color: #8B0000;
+    }
+    #descansoCard {
+      grid-column: span 2; /* Descanso ocupa linha inteira */
+    }
+    .totals-container {
       grid-column: span 2;
       background-color: #ddd;
       border-radius: 10px;
       padding: 15px;
-      text-align: center;
+      color: #000;
       font-weight: bold;
+      display: flex;
+      justify-content: space-around;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
-    .btn-finalizar {
-      grid-column: span 2;
-      padding: 15px;
-      font-size: 16px;
-      background-color: #001f66;
+    .totals-container div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .btn-footer {
+      position: fixed;
+      bottom: 0;
+      left: 250px; /* largura da sidebar */
+      width: calc(100% - 250px);
+      background-color: #8B0000;
       color: #fff;
       border: none;
-      border-radius: 8px;
+      font-size: 20px;
+      padding: 15px 0;
       cursor: pointer;
+      font-weight: bold;
+      z-index: 50;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
     @media (min-width: 768px) {
-      .main { margin-left: 250px; }
+      .main { margin-left: 250px; padding-bottom: 110px; }
       .topbar { left: 250px; }
       .sidebar { transform: translateX(0); }
+      .btn-footer { left: 250px; width: calc(100% - 250px); }
     }
   </style>
 </head>
@@ -136,34 +169,42 @@
       </div>
       <div class="content" id="content">
         <div class="card" onclick="startTimer('refeicao')">
+          <i class="material-icons">restaurant</i>
           <div id="refeicao">00:00:00</div>
           <p>Refeição</p>
         </div>
         <div class="card" onclick="startTimer('espera')">
+          <i class="material-icons">hourglass_empty</i>
           <div id="espera">00:00:00</div>
           <p>Espera</p>
         </div>
         <div class="card" onclick="startTimer('disponivel')">
+          <i class="material-icons">check_circle_outline</i>
           <div id="disponivel">00:00:00</div>
           <p>Disponível</p>
         </div>
         <div class="card" onclick="startTimer('direcao')">
+          <i class="material-icons">drive_eta</i>
           <div id="direcao">00:00:00</div>
           <p>Direção</p>
         </div>
-        <div class="card" id="descansoCard">
+        <div class="card" id="descansoCard" onclick="startTimer('descanso')">
+          <i class="material-icons">hotel</i>
           <div id="descanso">00:00:00</div>
           <p>Descanso</p>
         </div>
-        <div class="total">
-          Horas Trabalhando<br><span id="horasTrabalhando">00:00:00</span>
+
+        <div class="totals-container">
+          <div>
+            Horas Trabalhando<br><span id="horasTrabalhando">00:00:00</span>
+          </div>
+          <div>
+            Horas Totais<br><span id="horasTotais">00:00:00</span>
+          </div>
         </div>
-        <div class="total">
-          Horas Totais<br><span id="horasTotais">00:00:00</span>
-        </div>
-        <button class="btn-finalizar" onclick="encerrarJornada()">Encerrar Jornada</button>
       </div>
     </div>
+    <button class="btn-footer" onclick="encerrarJornada()">Encerrar Jornada</button>
   </div>
 
   <script>
@@ -185,6 +226,8 @@
       document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
       if (tipo !== 'descanso') {
         document.querySelector(`[onclick*="${tipo}"]`).classList.add('active');
+      } else {
+        document.getElementById('descansoCard').classList.add('active');
       }
 
       interval = setInterval(() => {
