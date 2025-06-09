@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jornada - Mantran Mobile</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: #fff;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #1a1a1a;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 30;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar.active { transform: translateX(0); }
+    .sidebar-header {
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .sidebar-header img { width: 60px; margin-bottom: 10px; }
+    .menu-item {
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #ffffff;
+      font-weight: 500;
+    }
+    .menu-item i { margin-right: 10px; }
+    .main {
+      flex: 1;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      width: 100%;
+    }
+    .topbar {
+      background: linear-gradient(to right, #8B0000, #000000);
+      color: white;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      height: 60px;
+    }
+    .topbar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .content {
+      margin-top: 60px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .card {
+      background-color: #f1f1f1;
+      color: #000;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .card.active {
+      background-color: #ffd700;
+    }
+    .total {
+      grid-column: span 2;
+      background-color: #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .btn-finalizar {
+      grid-column: span 2;
+      padding: 15px;
+      font-size: 16px;
+      background-color: #001f66;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    @media (min-width: 768px) {
+      .main { margin-left: 250px; }
+      .topbar { left: 250px; }
+      .sidebar { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="logo.png" alt="Logo Mantran" />
+        <h2>Motorista</h2>
+        <p>ID123</p>
+      </div>
+      <div class="menu-item" onclick="location.href='dashboard.html'"><i class="material-icons">description</i>Manifesto</div>
+      <div class="menu-item" onclick="location.href='jornada.html'"><i class="material-icons">timer</i>Jornada</div>
+      <div class="menu-item" onclick="location.href='viagens.html'"><i class="material-icons">map</i>Viagens</div>
+      <a href="index.html" class="menu-item"><i class="material-icons">exit_to_app</i>Sair</a>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <button id="menuButton"><i class="material-icons">menu</i></button>
+        <h1 style="margin-left: 15px; font-size: 20px;">Jornada</h1>
+      </div>
+      <div class="content" id="content">
+        <div class="card" onclick="startTimer('refeicao')">
+          <div id="refeicao">00:00:00</div>
+          <p>Refeição</p>
+        </div>
+        <div class="card" onclick="startTimer('espera')">
+          <div id="espera">00:00:00</div>
+          <p>Espera</p>
+        </div>
+        <div class="card" onclick="startTimer('disponivel')">
+          <div id="disponivel">00:00:00</div>
+          <p>Disponível</p>
+        </div>
+        <div class="card" onclick="startTimer('direcao')">
+          <div id="direcao">00:00:00</div>
+          <p>Direção</p>
+        </div>
+        <div class="card" id="descansoCard">
+          <div id="descanso">00:00:00</div>
+          <p>Descanso</p>
+        </div>
+        <div class="total">
+          Horas Trabalhando<br><span id="horasTrabalhando">00:00:00</span>
+        </div>
+        <div class="total">
+          Horas Totais<br><span id="horasTotais">00:00:00</span>
+        </div>
+        <button class="btn-finalizar" onclick="encerrarJornada()">Encerrar Jornada</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let timers = {
+      refeicao: 0,
+      espera: 0,
+      disponivel: 0,
+      direcao: 0,
+      descanso: 0
+    };
+    let active = null;
+    let interval = null;
+
+    function startTimer(tipo) {
+      if (active === tipo) return;
+      if (interval) clearInterval(interval);
+      active = tipo;
+
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+      if (tipo !== 'descanso') {
+        document.querySelector(`[onclick*="${tipo}"]`).classList.add('active');
+      }
+
+      interval = setInterval(() => {
+        timers[tipo]++;
+        updateTimers();
+      }, 1000);
+    }
+
+    function encerrarJornada() {
+      if (interval) clearInterval(interval);
+      active = 'descanso';
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+      document.getElementById('descansoCard').classList.add('active');
+      interval = setInterval(() => {
+        timers.descanso++;
+        updateTimers();
+      }, 1000);
+    }
+
+    function updateTimers() {
+      for (const tipo in timers) {
+        document.getElementById(tipo).textContent = formatTime(timers[tipo]);
+      }
+      const trabalhando = timers.disponivel + timers.direcao;
+      const total = Object.values(timers).reduce((a, b) => a + b, 0);
+      document.getElementById('horasTrabalhando').textContent = formatTime(trabalhando);
+      document.getElementById('horasTotais').textContent = formatTime(total);
+    }
+
+    function formatTime(seconds) {
+      const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    document.getElementById('menuButton').addEventListener('click', function (e) {
+      e.stopPropagation();
+      document.getElementById('sidebar').classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!document.getElementById('sidebar').contains(event.target) && event.target !== document.getElementById('menuButton')) {
+        document.getElementById('sidebar').classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
