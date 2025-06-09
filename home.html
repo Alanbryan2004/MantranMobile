@@ -78,17 +78,18 @@
     .content {
       margin-top: 60px;
       padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      justify-content: center;
+      justify-items: center;
     }
     .card {
       background-color: #ffffff;
       color: #000;
       border-radius: 10px;
       padding: 20px;
-      width: 180px;
+      width: 100%;
+      max-width: 300px;
       box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
       text-align: center;
       cursor: pointer;
@@ -120,9 +121,9 @@
         <h2>Motorista</h2>
         <p>ID123</p>
       </div>
-      <div class="menu-item"><i class="material-icons">description</i>Manifesto</div>
-      <div class="menu-item"><i class="material-icons">timer</i>Jornada</div>
-      <div class="menu-item"><i class="material-icons">map</i>Viagens</div>
+      <div class="menu-item" onclick="location.href='dashboard.html'"><i class="material-icons">description</i>Manifesto</div>
+      <div class="menu-item" onclick="location.href='jornada.html'"><i class="material-icons">timer</i>Jornada</div>
+      <div class="menu-item" onclick="location.href='viagens.html'"><i class="material-icons">map</i>Viagens</div>
       <a href="index.html" class="menu-item"><i class="material-icons">exit_to_app</i>Sair</a>
     </div>
     <div class="main">
