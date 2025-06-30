@@ -1,8 +1,32 @@
 {
   "rewrites": [
-    { 
+    {
       "source": "/token/mobile/login",
       "destination": "http://w2022-0691.emartim.com.br:35398/token/mobile/login"
+    },
+    {
+      "source": "/manifesto/PorCNH/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/PorCNH"
+    },
+    {
+      "source": "/manifesto/destino/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/destino/"
+    },
+    {
+      "source": "/manifesto/documento/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/documento/"
+    },
+    {
+      "source": "/manifesto/nota/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/nota/"
+    },
+    {
+      "source": "/manifesto/ocorrencia/",
+      "des,tination": "http://w2022-0691.emartim.com.br:35398/manifesto/ocorrencia/"
+    },
+    {
+      "source": "/manifesto/InicioTransito/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/InicioTransito"
     }
   ]
 }
