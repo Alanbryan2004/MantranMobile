@@ -9,24 +9,28 @@
       "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/PorCNH"
     },
     {
-      "source": "/manifesto/destino",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/destino"
+      "source": "/manifesto/destino/:cD_Filial/:nR_Manifesto",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/destino/:cD_Filial/:nR_Manifesto"
     },
     {
-      "source": "/manifesto/documento",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/documento"
+      "source": "/manifesto/documento/:cD_Filial/:nR_Manifesto/:cgC_CPF",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/documento/:cD_Filial/:nR_Manifesto/:cgC_CPF"
     },
     {
-      "source": "/manifesto/nota",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/nota"
+      "source": "/manifesto/nota/:tP_Documento/:nR_Documento/:nR_Manifesto/:cgC_CPF",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/nota/:tP_Documento/:nR_Documento/:nR_Manifesto/:cgC_CPF"
     },
     {
-      "source": "/manifesto/ocorrencia",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/ocorrencia"
+      "source": "/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto"
     },
     {
-      "source": "/manifesto/InicioTransito",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/InicioTransito"
+      "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto"
+    },
+    {
+      "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao"
     }
   ]
 }
