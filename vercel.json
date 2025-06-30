@@ -22,7 +22,7 @@
     },
     {
       "source": "/manifesto/ocorrencia/",
-      "des,tination": "http://w2022-0691.emartim.com.br:35398/manifesto/ocorrencia/"
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/ocorrencia/"
     },
     {
       "source": "/manifesto/InicioTransito/",
