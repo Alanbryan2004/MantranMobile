@@ -33,17 +33,16 @@
       "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao"
     },
     {
-      "source" : "/manifesto/baixarnota",
-      "destination" : "http://w2022-0691.emartim.com.br:35398/manifesto/baixarnota"
+      "source": "/manifesto/baixarnota",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/baixarnota"
     },
     {
-      "source" : "manifesto/chegou_cliente",
+      "source": "manifesto/chegoucliente",
       "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegou_cliente"
+    },
+    {
+      "source": "manifesto/chegoucliente",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegou_cliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto/"
     }
   ]
 }
-
-
-
-    "URI_API_FINISH_INVOICE": "http://w2022-0691.emartim.com.br:35398/manifesto/baixarnota",
-"URI_API_ARRIVE_AT_DESTINY": "http://w2022-0691.emartim.com.br:35398/manifesto/chegou_cliente"
