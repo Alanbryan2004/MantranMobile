@@ -38,11 +38,11 @@
     },
     {
       "source": "manifesto/chegoucliente",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegou_cliente"
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegoucliente"
     },
     {
-      "source": "manifesto/chegoucliente",
-      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegou_cliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto/"
+      "source": "manifesto/chegoucliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto/",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/chegoucliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto/"
     }
   ]
 }
