@@ -51,6 +51,10 @@
     {
       "source": "/manifesto/tipo/:cD_Filial/:nR_Manifesto",
       "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/tipo/:cD_Filial/:nR_Manifesto"
+    },
+    {
+      "source": "/manifesto/EnviarFTP",
+      "destination": "http://w2022-0691.emartim.com.br:35398/manifesto/EnviarFTP"
     }
   ]
 }
