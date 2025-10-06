@@ -39,7 +39,7 @@
     {
       "source": "/manifesto/baixarnota/todas",
       "destination": "http://138.59.144.70:35398/manifesto/baixarnota/todas"
-    },    
+    },
     {
       "source": "/manifesto/chegoucliente",
       "destination": "http://138.59.144.70:35398/manifesto/chegoucliente"
