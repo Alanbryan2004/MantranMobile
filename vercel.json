@@ -2,63 +2,65 @@
   "rewrites": [
     {
       "source": "/token/v2/mobile/login",
-      "destination": "http://138.59.144.70:35398/token/v2/mobile/login"
+      "destination": "http://api.mantran.eti.br:35398/token/v2/mobile/login"
     },
     {
       "source": "/manifesto/PorCNH",
-      "destination": "http://138.59.144.70:35398/manifesto/PorCNH"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/PorCNH"
     },
     {
       "source": "/manifesto/destino/:cD_Filial/:nR_Manifesto",
-      "destination": "http://138.59.144.70:35398/manifesto/destino/:cD_Filial/:nR_Manifesto"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/destino/:cD_Filial/:nR_Manifesto"
     },
     {
       "source": "/manifesto/documento/:cD_Filial/:nR_Manifesto/:cgC_CPF",
-      "destination": "http://138.59.144.70:35398/manifesto/documento/:cD_Filial/:nR_Manifesto/:cgC_CPF"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/documento/:cD_Filial/:nR_Manifesto/:cgC_CPF"
     },
     {
       "source": "/manifesto/nota/:tP_Documento/:nR_Documento/:nR_Manifesto/:cgC_CPF",
-      "destination": "http://138.59.144.70:35398/manifesto/nota/:tP_Documento/:nR_Documento/:nR_Manifesto/:cgC_CPF"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/nota/:tP_Documento/:nR_Documento/:nR_Manifesto/:cgC_CPF"
     },
     {
       "source": "/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto",
-      "destination": "http://138.59.144.70:35398/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto"
     },
     {
       "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto",
-      "destination": "http://138.59.144.70:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto"
     },
+
     {
-      "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao",
-      "destination": "http://138.59.144.70:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao"
+      "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf",
+      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf"
     },
+
     {
       "source": "/manifesto/baixarnota",
-      "destination": "http://138.59.144.70:35398/manifesto/baixarnota"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/baixarnota"
     },
     {
       "source": "/manifesto/baixarnota/todas",
-      "destination": "http://138.59.144.70:35398/manifesto/baixarnota/todas"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/baixarnota/todas"
     },
     {
       "source": "/manifesto/chegoucliente",
-      "destination": "http://138.59.144.70:35398/manifesto/chegoucliente"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/chegoucliente"
     },
     {
       "source": "/manifesto/chegoucliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto",
-      "destination": "http://138.59.144.70:35398/manifesto/chegoucliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/chegoucliente/:cD_Empresa/:cD_Filial/:tP_Docto/:nR_Docto"
     },
     {
       "source": "/manifesto/tipo/:cD_Filial/:nR_Manifesto",
-      "destination": "http://138.59.144.70:35398/manifesto/tipo/:cD_Filial/:nR_Manifesto"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/tipo/:cD_Filial/:nR_Manifesto"
     },
     {
       "source": "/manifesto/EnviarFTP",
-      "destination": "http://138.59.144.70:35398/manifesto/EnviarFTP"
+      "destination": "http://api.mantran.eti.br:35398/manifesto/EnviarFTP"
     },
     {
       "source": "/viagem/viagem",
-      "destination": "http://138.59.144.70:35398/viagem/viagem"
+      "destination": "http://api.mantran.eti.br:35398/viagem/viagem"
     }
   ]
 }
