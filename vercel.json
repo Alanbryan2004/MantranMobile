@@ -25,10 +25,9 @@
       "destination": "http://api.mantran.eti.br:35398/manifesto/ocorrencia/:cD_Filial/:tP_Documento/:nR_Manifesto"
     },
     {
-      "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto",
-      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto"
+      "source": "/manifesto/InicioTransito/:filial/:manifesto/:nrDoc",
+      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:filial/:manifesto/:nrDoc"
     },
-
     {
       "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf",
       "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf"
