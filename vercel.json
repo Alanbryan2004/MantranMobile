@@ -32,7 +32,14 @@
       "source": "/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf",
       "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/:cD_Filial/:nR_Manifesto/:usar_Data_Emissao/:cD_Empresa/:tP_Docto/:nR_Docto/:cGc_Cpf"
     },
-
+    {
+      "source": "/manifesto/InicioTransito/Todos",
+      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/Todos"
+    },
+    {
+      "source": "/manifesto/InicioTransito/VerificarTodos",
+      "destination": "http://api.mantran.eti.br:35398/manifesto/InicioTransito/VerificarTodos"
+    },
     {
       "source": "/manifesto/baixarnota",
       "destination": "http://api.mantran.eti.br:35398/manifesto/baixarnota"
